@@ -32,16 +32,16 @@ void setup_angle_calc(void){
     #endif
 
     // initialize device
-    Serial.println("Initializing I2C devices...");
+//    Serial.println("Initializing I2C devices..."); //debugging
     accelgyro.initialize();
 
     // verify connection
-    Serial.println("Testing device connections...");
-    Serial.println(accelgyro.testConnection() ? "MPU6050 connection successful" : "MPU6050 connection failed");
+//    Serial.println("Testing device connections..."); //debugging
+//    Serial.println(accelgyro.testConnection() ? "MPU6050 connection successful" : "MPU6050 connection failed");//debugging
    
 }
 
-void complemetary_filter(short gy, short ax, short ay, short az,float *angle_y){
+void filter(short gy, short ax, short ay, short az,float *angle_y){
 //   *angle_x += (gx / GYROSCOPE_SENSITIVITY) * dt;
    *angle_y += (gy / GYROSCOPE_SENSITIVITY) * dt;
    
@@ -49,19 +49,19 @@ void complemetary_filter(short gy, short ax, short ay, short az,float *angle_y){
    
    if (forceMagnitudeApprox > 8192 && forceMagnitudeApprox < 32768)
     {   
-//        rollAcc_x, 
-//        rollAcc_x = atan2f(ay, az) * 180 / M_PI;
-//        *angle_x = (*angle_x) * 0.98 + rollAcc_x * 0.02;
         float rollAcc_y;        
         rollAcc_y = atan2f(ax, az) * 180 / M_PI;
         *angle_y = (*angle_y) * 0.98 + rollAcc_y * 0.02;
+//        Serial.println("filter chl rha");//debugging
     }
     }
 
 
-void loop_angle_calc(void){
+float loop_angle_calc(void){
   // put your main code here, to run repeatedly:
   accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
-  complemetary_filter(gy,ax, ay, az,&angle_y);
-  Serial.println(angle_y);
+  filter(gy,ax, ay, az,&angle_y);
+//  Serial.println(angle_y);
+//  Serial.println("loop_angle_calc chl rha");//debugging
+  return angle_y;
 }
