@@ -15,3 +15,6 @@ Hardware Components required:
 - LiPo Battery,
 - SG90 Micro-Servo motor
 
+[Link to video featuring working prototype](https://drive.google.com/open?id=1Nbgl3Theu-LQH1xYVAFAmez0FdJoFDs2)
+
+
