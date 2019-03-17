@@ -8,7 +8,7 @@ float Kp = 7;
 float Ki = 6;        
 float Kd = 3;        
 float last_angle;
-float iTerm=0;
+//float iTerm=0;
 float pTerm, dTerm;          
 float targetAngle = 0;          
  
@@ -46,7 +46,7 @@ int PID_controller(float current_angle) {
     else if (PIDValue < -255) 
         PIDValue = -255; 
    
-    Serial.println("Pid_controller chl rha");//debugging
+//    Serial.println("Pid_controller chl rha");//debugging
     
     return int(PIDValue);
 }
@@ -60,17 +60,17 @@ void timekeeper() {
     if (timeGoneBy < STD_LOOP_TIME) 
         delay(STD_LOOP_TIME - timeGoneBy);
         
-    Serial.println("timekeeper chl rha");         //debugging
+    //Serial.println("timekeeper chl rha");         //debugging
     
     loopStartTime = millis(); //Update loop timer variables   
 }
 
 
-//void rotate(int motorinput){
-//  if (motorinput<0)
-//    {analogWrite(fly_wheel_pin1, motorinput);
-//     analogWrite(fly_wheel_pin2,0);}
-//  else
-//    {analogWrite(fly_wheel_pin2, motorinput);
-//     analogWrite(fly_wheel_pin1,0);}
-//}
+void rotate(int motorinput){
+  if (motorinput<0)
+    {analogWrite(fly_wheel_pin1, motorinput);
+     analogWrite(fly_wheel_pin2,0);}
+  else
+    {analogWrite(fly_wheel_pin2, motorinput);
+     analogWrite(fly_wheel_pin1,0);}
+}
