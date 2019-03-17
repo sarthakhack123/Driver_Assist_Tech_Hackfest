@@ -9,8 +9,8 @@ int flyw1=9,flyw2=10;
 void setup_all_reciever(){
     pinMode(m1,OUTPUT);
     pinMode(m2,OUTPUT);
-    pinMode(flyw1,OUTPUT);
-    pinMode(flyw2,OUTPUT);
+//    pinMode(flyw1,OUTPUT);
+//    pinMode(flyw2,OUTPUT);
     pinMode(A0, INPUT);
     pinMode(A1, INPUT);
 }

@@ -32,12 +32,11 @@ void setup_angle_calc(void){
     #endif
 
     // initialize device
-//    Serial.println("Initializing I2C devices..."); //debugging
+    // Serial.println("Initializing I2C devices..."); //debugging
     accelgyro.initialize();
-
     // verify connection
-//    Serial.println("Testing device connections..."); //debugging
-//    Serial.println(accelgyro.testConnection() ? "MPU6050 connection successful" : "MPU6050 connection failed");//debugging
+    Serial.println("Testing device connections..."); //debugging
+    Serial.println(accelgyro.testConnection() ? "MPU6050 connection successful" : "MPU6050 connection failed");//debugging
    
 }
 
@@ -61,7 +60,7 @@ float loop_angle_calc(void){
   // put your main code here, to run repeatedly:
   accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
   filter(gy,ax, ay, az,&angle_y);
-//  Serial.println(angle_y);
+  Serial.println(angle_y);
 //  Serial.println("loop_angle_calc chl rha");//debugging
   return angle_y;
 }

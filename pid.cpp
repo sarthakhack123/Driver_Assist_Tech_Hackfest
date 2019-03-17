@@ -1,13 +1,9 @@
 #include "Arduino.h"
-#define STD_LOOP_TIME 10
-
-int timeGoneBy = STD_LOOP_TIME;
-unsigned long loopStartTime = 0;
 
 float Kp = 7;    
 float Ki = 6;        
 float Kd = 3;        
-float last_angle;
+float last_angle=0;
 //float iTerm=0;
 float pTerm, dTerm;          
 float targetAngle = 0;          
@@ -23,7 +19,6 @@ void setup_pid(){
 }
  
 int PID_controller(float current_angle) {  
-
     thisTime = millis();
     double timeChange = double(thisTime - lastTime); //time since called last time
  
@@ -46,31 +41,23 @@ int PID_controller(float current_angle) {
     else if (PIDValue < -255) 
         PIDValue = -255; 
    
-//    Serial.println("Pid_controller chl rha");//debugging
+    //Serial.print("pid value\t");
+   
     
     return int(PIDValue);
 }
 
- 
-void timekeeper() {
- 
-    timeGoneBy = millis() - loopStartTime; // Calculate time since loop began
-    
-    // required time not reached!
-    if (timeGoneBy < STD_LOOP_TIME) 
-        delay(STD_LOOP_TIME - timeGoneBy);
-        
-    //Serial.println("timekeeper chl rha");         //debugging
-    
-    loopStartTime = millis(); //Update loop timer variables   
-}
 
 
 void rotate(int motorinput){
+
+  Serial.println(motorinput);
+//  analogWrite(fly_wheel_pin1, motorinput);
+ 
   if (motorinput<0)
-    {analogWrite(fly_wheel_pin1, motorinput);
+    {analogWrite(fly_wheel_pin1, abs(motorinput));
      analogWrite(fly_wheel_pin2,0);}
   else
-    {analogWrite(fly_wheel_pin2, motorinput);
+    {analogWrite(fly_wheel_pin2, abs(motorinput));
      analogWrite(fly_wheel_pin1,0);}
 }
