@@ -3,8 +3,8 @@
 
 	void setup_angle_calc(void);
 
-	void loop_angle_calc(void);
+	float loop_angle_calc(void);
 
-	void complemetary_filter(short gy, short ax, short ay, short az,float *angle_y);
+	void filter(short gy, short ax, short ay, short az,float *angle_y);
 
 #endif
